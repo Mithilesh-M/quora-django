@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1><strong>BookApp Summary:</strong></h1>
+    <br>
+    <ul class="list-group">
+      <li class="list-group-item" style="background-color:rgb(99, 153, 124);"><h5><strong>Total Questions :</strong> {{ No_Of_Question }}</h5></li>
+      <li class="list-group-item" style="background-color:rgb(99, 153, 124);"><h5><strong>Total Answers :</strong> {{ No_Of_Answer }}</h5></li>
+      <li class="list-group-item" style="background-color:rgb(99, 153, 124);"><h5><strong>Total Comments :</strong> {{ No_Of_Comment }}</h5></li>
+      <li class="list-group-item" style="background-color:rgb(99, 153, 124);"><h5><strong>Total Users :</strong> {{ No_Of_User }}</h5></li>
+    </ul>
+{% endblock %}
