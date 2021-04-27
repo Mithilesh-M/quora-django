@@ -13,4 +13,5 @@ urlpatterns = [
     path('answer/create', views.AnswerCreateView.as_view(), name='answer-create'),
     path('comment-question/create', views.CommentCreateViewQuestion.as_view(), name='comment-question-create'),
     path('comment-question/delete/<int:pk>', views.CommentDeleteViewQuestion.as_view(), name='comment-question-delete'),
+    path('comment-question/update/<int:pk>', views.CommentUpdateViewQuestion.as_view(), name='comment-question-update'),
 ]

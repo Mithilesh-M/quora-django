@@ -92,3 +92,9 @@ class CommentDeleteViewQuestion(generic.DeleteView):
         answer_id = self.kwargs['pk']
         question = Answer.objects.get(pk=answer_id)
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
+
+
+class CommentUpdateViewQuestion(generic.UpdateView):
+    model = Comment
+    fields = ['comment','answer', 'question', 'vote', 'user']
+    success_url = reverse_lazy('question-list')
