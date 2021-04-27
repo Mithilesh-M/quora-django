@@ -17,7 +17,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-sm">
-                      <a href="">{{ question }}</a>
+                      <a href="{% url 'question-detail' question.id %}">{{ question }}</a>
                     </div>
                     <div class="col-sm">
                         <button class="mybutton" onclick="location.href='{% url 'question-delete' question.id %}';">Delete</button>

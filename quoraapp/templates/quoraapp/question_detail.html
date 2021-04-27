@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+  <button style="border-radius: 50%;border-color: black;" onclick="location.href='{% url 'question-list' %}';">
+    <a href="{% url 'question-list' %}" style="color: green">
+    <i class="fa fa-arrow-left" onmouseover = "this.style.color = 'black'" onmouseout = "this.style.color = 'green'" ></i>
+    </a>
+  </button>
+  <button style="border-color: black;" onclick="location.href='{% url 'question-delete' question.id %}';">
+    Delete
+  </button>
+  <button style="border-color: black;" onclick="location.href='{% url 'question-update' question.id %}';">
+    Update
+  </button>
+  <br><br>
+    <div class="container rounded" style="background-color: rgb(99, 153, 124);">
+  <h3>Question Detail</h3>
+  <p><strong>Title: </strong>{{ question.title }}</p>
+  <p><strong>User: </strong>{{ question.user }}</p>
+  <p><strong>Description: </strong>{{ question.description }}</p>
+  <p><strong>Vote: </strong>{{ question.get_vote_display }}</p>
+  <p><strong>Tags : </strong></p>
+   <div style="margin-left:20px;margin-top:20px">
+       {% if question.tags.all %}
+     <ul>
+    {% for tag in question.tags.all %}
+      <li>
+        <p>{{ tag.name }}</p>
+      </li>
+    {% endfor %}
+    </ul>
+     {% else %}
+      <p>There are no tags added in this question.</p>
+     {% endif %}
+   </div>
+    </div>
+
+{% endblock %}
