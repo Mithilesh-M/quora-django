@@ -34,6 +34,21 @@
       <p>There are no tags added in this question.</p>
      {% endif %}
    </div>
+        <p><strong>Comments : </strong></p>
+        {% if question.comment_set.all %}
+        <ul class="list-group">
+    {% for comment in question.comment_set.all %}
+      <li class="list-group-item">
+        <p>{{ comment.comment }}</p>
+          <span class="badge badge-pill" style="font-size: medium;"> - {{comment.user}}</span>
+          <button class = "rounded" style="border-color: black;" onclick="location.href='';">Update</button>
+          <button class = "rounded" style="border-color: black;" onclick="location.href='';">Delete</button>
+      </li>
+        {% endfor %}
+        </ul>
+     {% else %}
+      <p>There are no comments for this question.</p>
+     {% endif %}
     </div>
     <br>
     <div class="container rounded" style="background-color: rgb(99, 153, 124);">
