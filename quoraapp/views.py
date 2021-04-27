@@ -48,3 +48,13 @@ class QuestionDetailView(generic.DetailView):
         answer = question.answer_set.all()
         context['answer_list'] = answer
         return context
+
+
+class AnswerUpdateView(generic.UpdateView):
+    model = Answer
+    fields = ['answer', 'question', 'vote', 'user']
+
+    def get_success_url(self):
+        answerid = self.kwargs['pk']
+        question = Answer.objects.get(pk=answerid)
+        return reverse_lazy('question-detail', kwargs={'pk': question.id})
