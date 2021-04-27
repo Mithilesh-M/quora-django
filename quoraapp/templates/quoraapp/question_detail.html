@@ -7,12 +7,14 @@
     <i class="fa fa-arrow-left" onmouseover = "this.style.color = 'black'" onmouseout = "this.style.color = 'green'" ></i>
     </a>
   </button>
+    {% if user.get_username == question.user.username %}
   <button style="border-color: black;" onclick="location.href='{% url 'question-delete' question.id %}';">
     Delete
   </button>
   <button style="border-color: black;" onclick="location.href='{% url 'question-update' question.id %}';">
     Update
   </button>
+    {% endif %}
   <br><br>
     <div class="container rounded" style="background-color: rgb(99, 153, 124);">
   <h3>Question Detail</h3>
@@ -55,8 +57,10 @@
               {% endif %}
             </p>
           <span class="badge badge-pill" style="font-size: medium;"> - {{comment.user}}</span>
+              {% if user.get_username == comment.user.username %}
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-question-update' comment.id %}';">Update</button>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-question-delete' comment.id %}';">Delete</button>
+            {% endif %}
       </li>
         {% endfor %}
         </ul>
@@ -82,8 +86,10 @@
               {% endif %}
             </p>
           <span class="badge badge-pill" style="font-size: medium;"> - {{answer.user}}</span>
+          {% if user.get_username == answer.user.username %}
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-update' answer.id %}';">Update</button>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-delete' answer.id %}';">Delete</button>
+          {% endif %}
           <div class="col-sm-10 pt-3" style="background-color:teal">
               <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-answer-create' %}';">Add Comment</button>
             <ul class="sidebar-nav" style="list-style-type: none;" >
@@ -100,8 +106,10 @@
               {% endif %}
             </p>
           <span class="badge badge-pill" style="font-size: medium;"> - {{comment.user}}</span>
+                    {% if user.get_username == comment.user.username %}
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-answer-update' comment.id %}';">Update</button>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-answer-delete' comment.id %}';">Delete</button>
+                    {% endif %}
               </li>
                 {% endfor %}
                 </ul>
