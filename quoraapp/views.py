@@ -74,8 +74,8 @@ class AnswerCreateView(generic.CreateView):
     fields = ['answer', 'question', 'vote', 'user']
 
     def get_success_url(self):
-        answer_id = self.kwargs['pk']
-        question = Answer.objects.get(pk=answer_id)
+        answer_id = self.object.id
+        question = Answer.objects.get(pk=answer_id).question
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
 
