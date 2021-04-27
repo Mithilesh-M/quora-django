@@ -7,4 +7,4 @@ class QuestionFilter(django_filters.FilterSet):
 
     class Meta:
         model = Question
-        fields = ['title', 'user', 'description']
+        fields = ['title', 'user', 'description', 'vote']
