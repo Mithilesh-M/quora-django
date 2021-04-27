@@ -93,8 +93,8 @@ class CommentDeleteViewQuestion(generic.DeleteView):
     model = Comment
 
     def get_success_url(self):
-        answer_id = self.kwargs['pk']
-        question = Answer.objects.get(pk=answer_id)
+        comment_id = self.object.id
+        question = Comment.objects.get(pk=comment_id).question
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
 
