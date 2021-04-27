@@ -34,6 +34,8 @@
       <p>There are no tags added in this question.</p>
      {% endif %}
    </div>
+        <div class="col-sm-10 pt-3" style="background-color:teal">
+            <ul class="sidebar-nav" style="list-style-type: none;" >
         <p><strong>Comments : </strong></p>
         {% if question.comment_set.all %}
         <ul class="list-group">
@@ -49,6 +51,8 @@
      {% else %}
       <p>There are no comments for this question.</p>
      {% endif %}
+            </ul>
+        </div>
     </div>
     <br>
     <div class="container rounded" style="background-color: rgb(99, 153, 124);">
@@ -62,6 +66,25 @@
           <span class="badge badge-pill" style="font-size: medium;"> - {{answer.user}}</span>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-update' answer.id %}';">Update</button>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-delete' answer.id %}';">Delete</button>
+          <div class="col-sm-10 pt-3" style="background-color:teal">
+            <ul class="sidebar-nav" style="list-style-type: none;" >
+                <h5>Comments</h5>
+                {% if answer.comment_set.all %}
+                <ul class="list-group">
+                {% for comment in answer.comment_set.all %}
+                <li class="list-group-item">
+            <p>{{ comment.comment }}</p>
+          <span class="badge badge-pill" style="font-size: medium;"> - {{comment.user}}</span>
+          <button class = "rounded" style="border-color: black;" onclick="location.href='';">Update</button>
+          <button class = "rounded" style="border-color: black;" onclick="location.href='';">Delete</button>
+              </li>
+                {% endfor %}
+                </ul>
+             {% else %}
+              <p>There are no comments for this question.</p>
+             {% endif %}
+            </ul>
+          </div>
       </li>
     {% endfor %}
     </ul>
