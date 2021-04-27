@@ -77,7 +77,7 @@
                 <li class="list-group-item">
             <p>{{ comment.comment }}</p>
           <span class="badge badge-pill" style="font-size: medium;"> - {{comment.user}}</span>
-          <button class = "rounded" style="border-color: black;" onclick="location.href='';">Update</button>
+          <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-answer-update' comment.id %}';">Update</button>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-answer-delete' comment.id %}';">Delete</button>
               </li>
                 {% endfor %}

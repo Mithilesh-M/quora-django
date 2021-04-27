@@ -109,3 +109,9 @@ class CommentCreateViewAnswer(generic.CreateView):
 class CommentDeleteViewAnswer(generic.DeleteView):
     model = Comment
     success_url = reverse_lazy('question-list')
+
+
+class CommentUpdateViewAnswer(generic.UpdateView):
+    model = Comment
+    fields = ['comment', 'answer', 'question', 'vote', 'user']
+    success_url = reverse_lazy('question-list')
