@@ -5,6 +5,7 @@ from django_filters import views
 from .filters import QuestionFilter
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 
 def show_index(request):
@@ -22,23 +23,27 @@ class QuestionListView(views.FilterView):
     template_name = 'quoraapp/question_list.html'
 
 
+@login_required
 class QuestionCreateView(generic.CreateView):
     model = Question
     fields = ['title', 'user', 'description', 'tags', 'vote']
     success_url = reverse_lazy('question-list')
 
 
+@login_required
 class QuestionUpdateView(generic.UpdateView):
     model = Question
     fields = ['title', 'user', 'description', 'tags', 'vote']
     success_url = reverse_lazy('question-list')
 
 
+@login_required
 class QuestionDeleteView(generic.DeleteView):
     model = Question
     success_url = reverse_lazy('question-list')
 
 
+@login_required
 class QuestionDetailView(generic.DetailView):
     model = Question
 
@@ -50,6 +55,7 @@ class QuestionDetailView(generic.DetailView):
         return context
 
 
+@login_required
 class AnswerUpdateView(generic.UpdateView):
     model = Answer
     fields = ['answer', 'question', 'vote', 'user']
@@ -60,6 +66,7 @@ class AnswerUpdateView(generic.UpdateView):
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
 
+@login_required
 class AnswerDeleteView(generic.DeleteView):
     model = Answer
 
@@ -69,6 +76,7 @@ class AnswerDeleteView(generic.DeleteView):
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
 
+@login_required
 class AnswerCreateView(generic.CreateView):
     model = Answer
     fields = ['answer', 'question', 'vote', 'user']
@@ -79,6 +87,7 @@ class AnswerCreateView(generic.CreateView):
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
 
+@login_required
 class CommentCreateViewQuestion(generic.CreateView):
     model = Comment
     fields = ['comment','answer', 'question', 'vote', 'user']
@@ -89,6 +98,7 @@ class CommentCreateViewQuestion(generic.CreateView):
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
 
+@login_required
 class CommentDeleteViewQuestion(generic.DeleteView):
     model = Comment
 
@@ -98,6 +108,7 @@ class CommentDeleteViewQuestion(generic.DeleteView):
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
 
+@login_required
 class CommentUpdateViewQuestion(generic.UpdateView):
     model = Comment
     fields = ['comment','answer', 'question', 'vote', 'user']
@@ -118,6 +129,7 @@ class CommentCreateViewAnswer(generic.CreateView):
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
 
+@login_required
 class CommentDeleteViewAnswer(generic.DeleteView):
     model = Comment
     success_url = reverse_lazy('question-list')
@@ -128,6 +140,7 @@ class CommentDeleteViewAnswer(generic.DeleteView):
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
 
+@login_required
 class CommentUpdateViewAnswer(generic.UpdateView):
     model = Comment
     fields = ['comment', 'answer', 'question', 'vote', 'user']
