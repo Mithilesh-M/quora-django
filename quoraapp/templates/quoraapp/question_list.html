@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <button class="mybutton" onclick="location.href='';">Create Question</button>
+    <button class="mybutton" onclick="location.href='{% url 'question-create' %}';">Create Question</button>
     <h1>Filter</h1>
     <form method="get">
         <table>
@@ -17,7 +17,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-sm">
-                      <a href="{% url 'music-detail' music.id %}">{{ question }}</a>
+                      <a href="">{{ question }}</a>
                     </div>
                     <div class="col-sm">
                         <button class="mybutton" onclick="location.href='';">Delete</button>
