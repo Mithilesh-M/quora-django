@@ -6,6 +6,7 @@ from .filters import QuestionFilter
 from django.views import generic
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import get_user_model
 
 
 def show_index(request):
@@ -16,6 +17,20 @@ def show_index(request):
         'No_Of_User': User.objects.all().count(),
     }
     return render(request, 'quoraapp/index.html', context)
+
+
+class UserCreateView(generic.CreateView):
+    model = get_user_model()
+    fields = ('username', 'first_name', 'last_name', 'email', 'password')
+    template_name = 'quoraapp/user_form.html'
+    success_url = reverse_lazy('question-list')
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+        self.success_url = reverse('index')
+        return super(UserCreateView, self).form_valid(form)
 
 
 class QuestionListView(views.FilterView):
@@ -153,4 +168,3 @@ class CommentUpdateViewAnswer(LoginRequiredMixin, generic.UpdateView):
         comment_id = self.object.id
         question = Comment.objects.get(pk=comment_id).answer.question
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
-
