@@ -108,7 +108,7 @@ class AnswerCreateView(LoginRequiredMixin, generic.CreateView):
 
 class CommentCreateViewQuestion(LoginRequiredMixin, generic.CreateView):
     model = Comment
-    fields = ['comment','answer', 'question', 'vote']
+    fields = ['comment', 'question', 'vote']
 
     def form_valid(self, form):
         comment = form.save(commit=False)
@@ -139,7 +139,7 @@ class CommentUpdateViewQuestion(LoginRequiredMixin, generic.UpdateView):
 
 class CommentCreateViewAnswer(LoginRequiredMixin, generic.CreateView):
     model = Comment
-    fields = ['comment','answer', 'question', 'vote']
+    fields = ['comment','answer', 'vote']
 
     def form_valid(self, form):
         comment = form.save(commit=False)
