@@ -19,7 +19,12 @@
   <p><strong>Title: </strong>{{ question.title }}</p>
   <p><strong>User: </strong>{{ question.user }}</p>
   <p><strong>Description: </strong>{{ question.description }}</p>
-<!--  <p><strong>Vote: </strong>{{ question.get_vote_display }}</p>-->
+  <p><strong>Vote: </strong>
+      {% if question.vote == 'u' %} <i class="fa fa-thumbs-up" style="color: green"></i>
+      {% elif question.vote == 'd' %} <i class="fa fa-thumbs-up" style="color: red"></i>
+      {% else %} <i class="fa fa-thumbs-up"></i>
+      {% endif %}
+  </p>
   <p><strong>Tags : </strong></p>
    <div style="margin-left:20px;margin-top:20px">
        {% if question.tags.all %}
@@ -43,6 +48,12 @@
     {% for comment in question.comment_set.all %}
       <li class="list-group-item">
         <p>{{ comment.comment }}</p>
+          <p><strong>Vote: </strong>
+              {% if comment.vote == 'u' %} <i class="fa fa-thumbs-up" style="color: green"></i>
+              {% elif comment.vote == 'd' %} <i class="fa fa-thumbs-up" style="color: red"></i>
+              {% else %} <i class="fa fa-thumbs-up"></i>
+              {% endif %}
+            </p>
           <span class="badge badge-pill" style="font-size: medium;"> - {{comment.user}}</span>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-question-update' comment.id %}';">Update</button>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-question-delete' comment.id %}';">Delete</button>
@@ -64,6 +75,12 @@
     {% for answer in answer_list %}
       <li class="list-group-item">
         <p>{{ answer.answer }}</p>
+          <p><strong>Vote: </strong>
+              {% if answer.vote == 'u' %} <i class="fa fa-thumbs-up" style="color: green"></i>
+              {% elif answer.vote == 'd' %} <i class="fa fa-thumbs-up" style="color: red"></i>
+              {% else %} <i class="fa fa-thumbs-up"></i>
+              {% endif %}
+            </p>
           <span class="badge badge-pill" style="font-size: medium;"> - {{answer.user}}</span>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-update' answer.id %}';">Update</button>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-delete' answer.id %}';">Delete</button>
@@ -76,6 +93,12 @@
                 {% for comment in answer.comment_set.all %}
                 <li class="list-group-item">
             <p>{{ comment.comment }}</p>
+                    <p><strong>Vote: </strong>
+              {% if comment.vote == 'u' %} <i class="fa fa-thumbs-up" style="color: green"></i>
+              {% elif comment.vote == 'd' %} <i class="fa fa-thumbs-up" style="color: red"></i>
+              {% else %} <i class="fa fa-thumbs-up"></i>
+              {% endif %}
+            </p>
           <span class="badge badge-pill" style="font-size: medium;"> - {{comment.user}}</span>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-answer-update' comment.id %}';">Update</button>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-answer-delete' comment.id %}';">Delete</button>
