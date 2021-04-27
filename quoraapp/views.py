@@ -68,6 +68,7 @@ class AnswerDeleteView(generic.DeleteView):
         question = Answer.objects.get(pk=answer_id)
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
+
 class AnswerCreateView(generic.CreateView):
     model = Answer
     fields = ['answer', 'question', 'vote', 'user']
@@ -83,3 +84,11 @@ class CommentCreateViewQuestion(generic.CreateView):
     fields = ['comment','answer', 'question', 'vote', 'user']
     success_url = reverse_lazy('question-list')
 
+
+class CommentDeleteViewQuestion(generic.DeleteView):
+    model = Comment
+
+    def get_success_url(self):
+        answer_id = self.kwargs['pk']
+        question = Answer.objects.get(pk=answer_id)
+        return reverse_lazy('question-detail', kwargs={'pk': question.id})
