@@ -38,8 +38,10 @@ class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
 
 class QuestionUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Question
-    fields = ['title', 'user', 'description', 'tags', 'vote']
-    success_url = reverse_lazy('question-list')
+    fields = ['title', 'description', 'tags', 'vote']
+
+    def get_success_url(self):
+        return reverse_lazy('question-detail', kwargs={'pk': self.kwargs['pk']})
 
 
 class QuestionDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -60,7 +62,7 @@ class QuestionDetailView(LoginRequiredMixin, generic.DetailView):
 
 class AnswerUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Answer
-    fields = ['answer', 'question', 'vote', 'user']
+    fields = ['answer', 'vote']
 
     def get_success_url(self):
         answer_id = self.kwargs['pk']
@@ -79,12 +81,14 @@ class AnswerDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class AnswerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Answer
-    fields = ['answer', 'question', 'vote', 'user']
+    fields = ['answer', 'question', 'vote']
 
-    def get_success_url(self):
-        answer_id = self.object.id
-        question = Answer.objects.get(pk=answer_id).question
-        return reverse_lazy('question-detail', kwargs={'pk': question.id})
+    def form_valid(self, form):
+        answer = form.save(commit=False)
+        answer.user = User.objects.get(pk=self.request.user.id)
+        answer.save()
+        self.success_url = reverse('question-detail', kwargs={'pk': answer.question.id})
+        return super(AnswerCreateView, self).form_valid(form)
 
 
 class CommentCreateViewQuestion(LoginRequiredMixin, generic.CreateView):
@@ -110,7 +114,7 @@ class CommentDeleteViewQuestion(LoginRequiredMixin, generic.DeleteView):
 
 class CommentUpdateViewQuestion(LoginRequiredMixin, generic.UpdateView):
     model = Comment
-    fields = ['comment','answer', 'question', 'vote', 'user']
+    fields = ['comment', 'vote']
 
     def get_success_url(self):
         comment_id = self.object.id
@@ -142,7 +146,7 @@ class CommentDeleteViewAnswer(LoginRequiredMixin, generic.DeleteView):
 
 class CommentUpdateViewAnswer(LoginRequiredMixin, generic.UpdateView):
     model = Comment
-    fields = ['comment', 'answer', 'question', 'vote', 'user']
+    fields = ['comment', 'vote']
     success_url = reverse_lazy('question-list')
 
     def get_success_url(self):
