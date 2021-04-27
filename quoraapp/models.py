@@ -47,7 +47,7 @@ class Answer(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return self.question.title
+        return self.answer
 
 
 class Comment(models.Model):
@@ -71,4 +71,4 @@ class Comment(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return self.question.title
+        return self.comment
