@@ -55,8 +55,8 @@ class AnswerUpdateView(generic.UpdateView):
     fields = ['answer', 'question', 'vote', 'user']
 
     def get_success_url(self):
-        answerid = self.kwargs['pk']
-        question = Answer.objects.get(pk=answerid)
+        answer_id = self.kwargs['pk']
+        question = Answer.objects.get(pk=answer_id)
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
 
 
@@ -64,6 +64,15 @@ class AnswerDeleteView(generic.DeleteView):
     model = Answer
 
     def get_success_url(self):
-        answerid = self.kwargs['pk']
-        question = Answer.objects.get(pk=answerid)
+        answer_id = self.kwargs['pk']
+        question = Answer.objects.get(pk=answer_id)
+        return reverse_lazy('question-detail', kwargs={'pk': question.id})
+
+class AnswerCreateView(generic.CreateView):
+    model = Answer
+    fields = ['answer', 'question', 'vote', 'user']
+
+    def get_success_url(self):
+        answer_id = self.kwargs['pk']
+        question = Answer.objects.get(pk=answer_id)
         return reverse_lazy('question-detail', kwargs={'pk': question.id})

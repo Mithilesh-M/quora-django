@@ -37,6 +37,7 @@
     </div>
     <br>
     <div class="container rounded" style="background-color: rgb(99, 153, 124);">
+        <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-create' %}';">Add Answer</button>
         <h3>Answers</h3>
         {% if answer_list %}
      <ul class="list-group">

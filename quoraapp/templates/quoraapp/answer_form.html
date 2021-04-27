@@ -1,13 +1,8 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <button style="border-radius: 50%;border-color: black;" onclick="location.href='{% url 'question-detail' answer.question.id %}';">
-        <a href="{% url 'question-detail' answer.question.id %}" style="color: green">
-            <i class="fa fa-arrow-left" onmouseover = "this.style.color = 'black'" onmouseout = "this.style.color = 'green'" ></i>
-        </a>
-    </button>
     <br><br>
-    <h1>Question</h1>
+    <h1>Answer</h1>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
