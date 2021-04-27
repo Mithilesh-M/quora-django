@@ -26,3 +26,9 @@ class QuestionCreateView(generic.CreateView):
     model = Question
     fields = ['title', 'user', 'description', 'tags']
     success_url = reverse_lazy('question-list')
+
+
+class QuestionUpdateView(generic.UpdateView):
+    model = Question
+    fields = ['title', 'user', 'description', 'tags', 'vote']
+    success_url = reverse_lazy('question-list')
