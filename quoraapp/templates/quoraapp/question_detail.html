@@ -42,7 +42,7 @@
      {% endif %}
    </div>
         <div class="col-sm-10 pt-3" style="background-color:teal">
-            <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-question-create' %}';">Add Comment</button>
+            <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-question-create' question.id %}';">Add Comment</button>
             <ul class="sidebar-nav" style="list-style-type: none;" >
         <p><strong>Comments : </strong></p>
         {% if question.comment_set.all %}
@@ -72,7 +72,7 @@
     </div>
     <br>
     <div class="container rounded" style="background-color: rgb(99, 153, 124);">
-        <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-create' %}';">Add Answer</button>
+        <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-create' question.id%}';">Add Answer</button>
         <h3>Answers</h3>
         {% if answer_list %}
      <ul class="list-group">
@@ -91,7 +91,7 @@
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-delete' answer.id %}';">Delete</button>
           {% endif %}
           <div class="col-sm-10 pt-3" style="background-color:teal">
-              <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-answer-create' %}';">Add Comment</button>
+              <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'comment-answer-create' answer.id %}';">Add Comment</button>
             <ul class="sidebar-nav" style="list-style-type: none;" >
                 <h5>Comments</h5>
                 {% if answer.comment_set.all %}

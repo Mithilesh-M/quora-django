@@ -96,11 +96,12 @@ class AnswerDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class AnswerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Answer
-    fields = ['answer', 'question', 'vote']
+    fields = ['answer', 'vote']
 
     def form_valid(self, form):
         answer = form.save(commit=False)
         answer.user = User.objects.get(pk=self.request.user.id)
+        answer.question = Question.objects.get(pk=self.kwargs['pk'])
         answer.save()
         self.success_url = reverse('question-detail', kwargs={'pk': answer.question.id})
         return super(AnswerCreateView, self).form_valid(form)
@@ -108,11 +109,12 @@ class AnswerCreateView(LoginRequiredMixin, generic.CreateView):
 
 class CommentCreateViewQuestion(LoginRequiredMixin, generic.CreateView):
     model = Comment
-    fields = ['comment', 'question', 'vote']
+    fields = ['comment', 'vote']
 
     def form_valid(self, form):
         comment = form.save(commit=False)
         comment.user = User.objects.get(pk=self.request.user.id)
+        comment.question = Question.objects.get(pk=self.kwargs['pk'])
         comment.save()
         self.success_url = reverse('question-detail', kwargs={'pk': comment.question.id})
         return super(CommentCreateViewQuestion, self).form_valid(form)
@@ -139,11 +141,12 @@ class CommentUpdateViewQuestion(LoginRequiredMixin, generic.UpdateView):
 
 class CommentCreateViewAnswer(LoginRequiredMixin, generic.CreateView):
     model = Comment
-    fields = ['comment','answer', 'vote']
+    fields = ['comment', 'vote']
 
     def form_valid(self, form):
         comment = form.save(commit=False)
         comment.user = User.objects.get(pk=self.request.user.id)
+        comment.answer = Answer.objects.get(pk=self.kwargs['pk'])
         comment.save()
         self.success_url = reverse('question-detail', kwargs={'pk': comment.answer.question.id})
         return super(CommentCreateViewAnswer, self).form_valid(form)
