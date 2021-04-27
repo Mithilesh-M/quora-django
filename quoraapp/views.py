@@ -89,12 +89,14 @@ class AnswerCreateView(LoginRequiredMixin, generic.CreateView):
 
 class CommentCreateViewQuestion(LoginRequiredMixin, generic.CreateView):
     model = Comment
-    fields = ['comment','answer', 'question', 'vote', 'user']
+    fields = ['comment','answer', 'question', 'vote']
 
-    def get_success_url(self):
-        comment_id = self.object.id
-        question = Comment.objects.get(pk=comment_id).question
-        return reverse_lazy('question-detail', kwargs={'pk': question.id})
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        comment.user = User.objects.get(pk=self.request.user.id)
+        comment.save()
+        self.success_url = reverse('question-detail', kwargs={'pk': comment.question.id})
+        return super(CommentCreateViewQuestion, self).form_valid(form)
 
 
 class CommentDeleteViewQuestion(LoginRequiredMixin, generic.DeleteView):
