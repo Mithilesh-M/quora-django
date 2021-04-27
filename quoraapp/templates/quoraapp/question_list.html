@@ -19,12 +19,14 @@
                     <div class="col-sm">
                       <a href="{% url 'question-detail' question.id %}">{{ question }}</a>
                     </div>
+                      {% if user.get_username == question.user.username %}
                     <div class="col-sm">
                         <button class="mybutton" onclick="location.href='{% url 'question-delete' question.id %}';">Delete</button>
                     </div>
                     <div class="col-sm">
                         <button class="mybutton" onclick="location.href='{% url 'question-update' question.id %}';">Update</button>
                     </div>
+                      {% endif %}
                   </div>
                 </div>
             </li>
