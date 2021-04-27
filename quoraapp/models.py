@@ -22,6 +22,10 @@ class Question(models.Model):
         help_text='Enter Vote',
     )
 
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.title
+
 
 class Answer(models.Model):
     """Model representing a Answer."""
@@ -40,6 +44,10 @@ class Answer(models.Model):
         default='n',
         help_text='Enter Vote',
     )
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.question
 
 
 class Comment(models.Model):
@@ -60,3 +68,7 @@ class Comment(models.Model):
         default='n',
         help_text='Enter Vote',
     )
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.question
