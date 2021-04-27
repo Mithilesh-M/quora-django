@@ -20,7 +20,7 @@
                       <a href="">{{ question }}</a>
                     </div>
                     <div class="col-sm">
-                        <button class="mybutton" onclick="location.href='';">Delete</button>
+                        <button class="mybutton" onclick="location.href='{% url 'question-delete' question.id %}';">Delete</button>
                     </div>
                     <div class="col-sm">
                         <button class="mybutton" onclick="location.href='{% url 'question-update' question.id %}';">Update</button>

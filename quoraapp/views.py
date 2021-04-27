@@ -32,3 +32,8 @@ class QuestionUpdateView(generic.UpdateView):
     model = Question
     fields = ['title', 'user', 'description', 'tags', 'vote']
     success_url = reverse_lazy('question-list')
+
+
+class QuestionDeleteView(generic.DeleteView):
+    model = Question
+    success_url = reverse_lazy('question-list')
