@@ -21,4 +21,5 @@ urlpatterns = [
     path('quora/', include('quoraapp.urls')),
     path('', RedirectView.as_view(url='quora/')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
