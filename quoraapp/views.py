@@ -58,3 +58,12 @@ class AnswerUpdateView(generic.UpdateView):
         answerid = self.kwargs['pk']
         question = Answer.objects.get(pk=answerid)
         return reverse_lazy('question-detail', kwargs={'pk': question.id})
+
+
+class AnswerDeleteView(generic.DeleteView):
+    model = Answer
+
+    def get_success_url(self):
+        answerid = self.kwargs['pk']
+        question = Answer.objects.get(pk=answerid)
+        return reverse_lazy('question-detail', kwargs={'pk': question.id})

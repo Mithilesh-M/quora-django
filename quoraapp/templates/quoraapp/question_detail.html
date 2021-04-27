@@ -45,6 +45,7 @@
         <p>{{ answer.answer }}</p>
           <span class="badge badge-pill" style="font-size: medium;"> - {{answer.user}}</span>
           <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-update' answer.id %}';">Update</button>
+          <button class = "rounded" style="border-color: black;" onclick="location.href='{% url 'answer-delete' answer.id %}';">Delete</button>
       </li>
     {% endfor %}
     </ul>
