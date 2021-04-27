@@ -24,7 +24,7 @@ class QuestionListView(views.FilterView):
 
 class QuestionCreateView(generic.CreateView):
     model = Question
-    fields = ['title', 'user', 'description', 'tags']
+    fields = ['title', 'user', 'description', 'tags', 'vote']
     success_url = reverse_lazy('question-list')
 
 
