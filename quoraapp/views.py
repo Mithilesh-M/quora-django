@@ -41,3 +41,10 @@ class QuestionDeleteView(generic.DeleteView):
 
 class QuestionDetailView(generic.DetailView):
     model = Question
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        question = Question.objects.get(pk=self.kwargs.get('pk'))
+        answer = question.answer_set.all()
+        context['answer_list'] = answer
+        return context

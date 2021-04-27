@@ -35,5 +35,20 @@
      {% endif %}
    </div>
     </div>
-
+    <br>
+    <div class="container rounded" style="background-color: rgb(99, 153, 124);">
+        <h3>Answers</h3>
+        {% if answer_list %}
+     <ul class="list-group">
+    {% for answer in answer_list %}
+      <li class="list-group-item">
+        <p>{{ answer.answer }}</p>
+          <span class="badge badge-pill" style="font-size: medium;"> - {{answer.user}}</span>
+      </li>
+    {% endfor %}
+    </ul>
+     {% else %}
+      <p>There are no answers for this question.</p>
+     {% endif %}
+    </div>
 {% endblock %}
