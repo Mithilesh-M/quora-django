@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django_filters import views
 from .filters import QuestionFilter
 from django.views import generic
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -25,8 +25,15 @@ class QuestionListView(views.FilterView):
 
 class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
     model = Question
-    fields = ['title', 'user', 'description', 'tags', 'vote']
+    fields = ['title', 'description', 'tags', 'vote']
     success_url = reverse_lazy('question-list')
+
+    def form_valid(self, form):
+        question = form.save(commit=False)
+        question.user = User.objects.get(pk=self.request.user.id)
+        question.save()
+        self.success_url = reverse('question-list')
+        return super(QuestionCreateView, self).form_valid(form)
 
 
 class QuestionUpdateView(LoginRequiredMixin, generic.UpdateView):
